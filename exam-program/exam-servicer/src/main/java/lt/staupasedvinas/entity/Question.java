@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -37,5 +38,4 @@ public class Question {
             joinColumns = @JoinColumn(name = "question_id"),
             inverseJoinColumns = @JoinColumn(name = "questionnaire_id"))
     private List<Questionnaire> questionnaireSet = new ArrayList<>();
-
 }

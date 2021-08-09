@@ -5,6 +5,10 @@ public class PrintUtil {
         System.out.println(string);
     }
 
+    private void printLong(Long l) {
+        print(String.valueOf(l));
+    }
+
     public static void printBadInput() {
         printErr("Bad input!");
     }
