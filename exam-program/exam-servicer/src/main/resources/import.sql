@@ -17,5 +17,13 @@ insert into exam (name, questionnaire_log_id) values ('E', 3);
 insert into exam (name, questionnaire_log_id) values ('G', 2);
 
 insert into answer (questionnaire_log_id, is_right, chosen_letter) values (1, true, 'a');
+insert into answer (questionnaire_log_id, is_right, chosen_letter) values (1, false, 'c');
+insert into answer (questionnaire_log_id, is_right, chosen_letter) values (1, true, 'b');
+
+insert into answer (questionnaire_log_id, is_right, chosen_letter) values (2, true, 'a');
 insert into answer (questionnaire_log_id, is_right, chosen_letter) values (2, false, 'c');
+insert into answer (questionnaire_log_id, is_right, chosen_letter) values (2, true, 'b');
+
+insert into answer (questionnaire_log_id, is_right, chosen_letter) values (3, true, 'a');
+insert into answer (questionnaire_log_id, is_right, chosen_letter) values (3, false, 'c');
 insert into answer (questionnaire_log_id, is_right, chosen_letter) values (3, true, 'b');

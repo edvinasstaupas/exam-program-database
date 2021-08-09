@@ -1,15 +1,12 @@
 package lt.staupasedvinas.service;
 
-import dao.exceptions.NoDataWithSuchIDException;
-import dao.exceptions.NoDataWithSuchTypeException;
 import lt.staupasedvinas.dao.DaoManager;
-import lt.staupasedvinas.dao.QuestionnaireDao;
-import lt.staupasedvinas.pojo.Statistic;
+import lt.staupasedvinas.pojo.PersonalStatistics;
 import lt.staupasedvinas.service.exam_solving_service.ExamSolvingService;
 import lt.staupasedvinas.service.question_services.QuestionAddingService;
 import lt.staupasedvinas.service.question_services.QuestionEditingService;
+import lt.staupasedvinas.service.statistics_service.StatisticsCreatingService;
 import lt.staupasedvinas.util.IDGenerator;
-import lt.staupasedvinas.util.PrintUtil;
 import org.hibernate.Session;
 
 import java.util.*;
@@ -33,7 +30,7 @@ public class ProgramInit {
                 1 start exam
                 2 create new question
                 3 edit questions
-                4 see statistics
+                4 see personalStatistics
                 5 
                 6 
                 7 
@@ -50,7 +47,7 @@ public class ProgramInit {
                 case "1" -> new ExamSolvingService(session, name).init();
                 case "2" -> new QuestionAddingService(session).init();
                 case "3" -> new QuestionEditingService(session).init();
-                case "4" -> printStatistic();
+                case "4" -> printStatistic(name);
                 //case "5" -> ();
                 //case "6" -> ();
                 //case "7" -> ();
@@ -61,7 +58,8 @@ public class ProgramInit {
         }
     }
 
-    private void printStatistic() {
-        //Statistic statistic = new Statistic();
+    private void printStatistic(String name) {
+        PersonalStatistics personalStatistics = new StatisticsCreatingService(session, name).init();
+        System.out.println(personalStatistics.toString());
     }
 }

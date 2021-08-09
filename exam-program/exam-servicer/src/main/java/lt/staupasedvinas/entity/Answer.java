@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
