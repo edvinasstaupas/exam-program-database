@@ -6,7 +6,9 @@ import lt.staupasedvinas.dao.ExamDao;
 import lt.staupasedvinas.dao.QuestionnaireLogDao;
 import lt.staupasedvinas.entity.Answer;
 import lt.staupasedvinas.entity.Exam;
-import lt.staupasedvinas.pojo.PersonalStatistics;
+import lt.staupasedvinas.entity.QuestionnaireLog;
+import lt.staupasedvinas.pojo.statistics.OverallStatistics;
+import lt.staupasedvinas.pojo.statistics.PersonalStatistics;
 import org.hibernate.Session;
 
 import java.util.HashMap;
@@ -14,49 +16,43 @@ import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class StatisticsCreatingService {
+public class OverallStatisticsCreatingService {
     public final Session session;
-    public final String name;
 
-    public PersonalStatistics init() {
-        QuestionnaireLogDao questionnaireLogDao = new QuestionnaireLogDao(session);
+    public OverallStatistics init() {
         ExamDao examDao = new ExamDao(session);
         AnswerDao answerDao = new AnswerDao(session);
-        List<Exam> examList = examDao.loadAllWithName(name);
-        List<Answer> answerList = answerDao.loadAllWithName(name);
-        //examList.forEach(System.out::println);
-        //answerList.forEach(System.out::println);
-
+        List<Exam> examList = examDao.loadAll();
+        List<Answer> answerList = answerDao.loadAll();
         Long sumOfA = 0L;
         Long sumOfB = 0L;
         Long sumOfC = 0L;
         Long sumOfRight = 0L;
-        Map<Long, Long> map = new HashMap<>();
+        Map<QuestionnaireLog, Long> map = new HashMap<>();
         for (Answer answer : answerList) {
             switch (answer.getChosenLetter()) {
                 case 'a' -> sumOfA++;
                 case 'b' -> sumOfB++;
                 case 'c' -> sumOfC++;
             }
-            Long questionnaireLogId = answer.getQuestionnaireLog().getId();
-            if (!map.containsKey(questionnaireLogId))
+            QuestionnaireLog questionnaireLog = answer.getQuestionnaireLog();
+            if (!map.containsKey(questionnaireLog))
                 if (answer.isRight()) {
-                    map.put(questionnaireLogId, 1L);
+                    map.put(questionnaireLog, 1L);
                     sumOfRight++;
                 } else
-                    map.put(questionnaireLogId, 0L);
+                    map.put(questionnaireLog, 0L);
             else {
-                Long sum = map.get(questionnaireLogId);
+                Long sum = map.get(questionnaireLog);
                 if (answer.isRight()) {
-                    map.replace(questionnaireLogId, sum + 1);
+                    map.replace(questionnaireLog, sum + 1);
                     sumOfRight++;
                 }
             }
             //answerList.stream().filter(Answer::isRight).count()
         }
 
-        return PersonalStatistics.builder()
-                .name(name)
+        return OverallStatistics.builder()
                 .sumOfExams((long) examList.size())
                 .questionnaireRightAnswerSum(map)
                 .rightAnswerSum(sumOfRight)

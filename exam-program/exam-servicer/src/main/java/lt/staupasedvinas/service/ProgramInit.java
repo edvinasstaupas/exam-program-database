@@ -1,11 +1,13 @@
 package lt.staupasedvinas.service;
 
 import lt.staupasedvinas.dao.DaoManager;
-import lt.staupasedvinas.pojo.PersonalStatistics;
+import lt.staupasedvinas.pojo.statistics.OverallStatistics;
+import lt.staupasedvinas.pojo.statistics.PersonalStatistics;
 import lt.staupasedvinas.service.exam_solving_service.ExamSolvingService;
 import lt.staupasedvinas.service.question_services.QuestionAddingService;
 import lt.staupasedvinas.service.question_services.QuestionEditingService;
-import lt.staupasedvinas.service.statistics_service.StatisticsCreatingService;
+import lt.staupasedvinas.service.statistics_service.OverallStatisticsCreatingService;
+import lt.staupasedvinas.service.statistics_service.PersonalStatisticsCreatingService;
 import lt.staupasedvinas.util.IDGenerator;
 import org.hibernate.Session;
 
@@ -30,8 +32,8 @@ public class ProgramInit {
                 1 start exam
                 2 create new question
                 3 edit questions
-                4 see personalStatistics
-                5 
+                4 see personal statistics
+                5 see overall statistics
                 6 
                 7 
                 8 
@@ -47,10 +49,8 @@ public class ProgramInit {
                 case "1" -> new ExamSolvingService(session, name).init();
                 case "2" -> new QuestionAddingService(session).init();
                 case "3" -> new QuestionEditingService(session).init();
-                case "4" -> printStatistic(name);
-                //case "5" -> ();
-                //case "6" -> ();
-                //case "7" -> ();
+                case "4" -> printPersonalStatistics(name);
+                case "5" -> printOverallStatistics();
                 case "?" -> print(commands);
                 case "0" -> exit(0);
                 default -> printBadInput();
@@ -58,8 +58,13 @@ public class ProgramInit {
         }
     }
 
-    private void printStatistic(String name) {
-        PersonalStatistics personalStatistics = new StatisticsCreatingService(session, name).init();
+    private void printOverallStatistics() {
+        OverallStatistics overallStatistics = new OverallStatisticsCreatingService(session).init();
+        System.out.println(overallStatistics.toString());
+    }
+
+    private void printPersonalStatistics(String name) {
+        PersonalStatistics personalStatistics = new PersonalStatisticsCreatingService(session, name).init();
         System.out.println(personalStatistics.toString());
     }
 }
