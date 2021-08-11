@@ -14,7 +14,7 @@ public class InputUtil {
         String answerInput = "";
         while (true) {
             answerInput = scanner.next();
-            if (answerInput.equals("a") || answerInput.equals("b") || answerInput.equals("c"))
+            if (answerInput.equals("a.txt") || answerInput.equals("b") || answerInput.equals("c"))
                 return answerInput.toCharArray()[0];
             else
                 printBadInput();

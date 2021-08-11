@@ -13,7 +13,7 @@ public class QuestionValueAssignationUtil {
     }
 
     protected static void setValueA(Question question) {
-        print("Please enter the answer a: ");
+        print("Please enter the answer a.txt: ");
         question.setAnswerA(getStringInput());
     }
 

@@ -1,18 +1,16 @@
 package lt.staupasedvinas.hibernate;
 
+import lt.staupasedvinas.util.ConfigUtil;
 import org.hibernate.cfg.Configuration;
+
+import java.util.Map;
 
 public class ConfigCreatingService {
     public static Configuration initPostgresConfig() {
         var cfg = new Configuration();
-        //TODO padaryti is external file
-        cfg.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
-        cfg.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost/exam_db");
-        cfg.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
-        cfg.setProperty("hibernate.connection.username", "postgres");
-        cfg.setProperty("hibernate.connection.password", "edvinas");
-        cfg.setProperty("hibernate.show_sql", "true");
-        cfg.setProperty("hibernate.hbm2ddl.auto", "create");
+        Map<String, String> properties = ConfigUtil.readConfig();
+        for (String key : properties.keySet())
+            cfg.setProperty(key, properties.get(key));
         return cfg;
     }
 }

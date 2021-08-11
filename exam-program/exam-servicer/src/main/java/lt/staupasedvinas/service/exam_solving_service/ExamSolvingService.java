@@ -101,7 +101,7 @@ public class ExamSolvingService {
 
     private Answer solveOneQuestion(Question question) {
         String questionOutput = question.getQuestion() +
-                "\na. " + question.getAnswerA() +
+                "\na.txt. " + question.getAnswerA() +
                 "\nb. " + question.getAnswerB() +
                 "\nc. " + question.getAnswerC();
         print(questionOutput);

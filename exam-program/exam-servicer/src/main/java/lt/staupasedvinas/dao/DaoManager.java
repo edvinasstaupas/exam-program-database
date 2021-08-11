@@ -14,7 +14,6 @@ public class DaoManager {
         cfg.addAnnotatedClass(QuestionnaireLog.class);
         cfg.addAnnotatedClass(Exam.class);
         cfg.addAnnotatedClass(Answer.class);
-
         return cfg.buildSessionFactory();
     }
 

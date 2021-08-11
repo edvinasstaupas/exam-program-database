@@ -51,7 +51,7 @@ public class QuestionEditingService {
     private Question getNewValues() {
         String questionOutput = "Question info: " +
                 "\n" + question.getQuestion() +
-                "\na. " + question.getAnswerA() +
+                "\na.txt. " + question.getAnswerA() +
                 "\nb. " + question.getAnswerB() +
                 "\nc. " + question.getAnswerC() +
                 "\nright answer letter: " + question.getRightAnswer();
@@ -61,7 +61,7 @@ public class QuestionEditingService {
         if (getBooleanInput()) {
             setValueQuestion(question);
         }
-        print("Would you like to change answer a?");
+        print("Would you like to change answer a.txt?");
         if (getBooleanInput()) {
             setValueA(question);
         }
