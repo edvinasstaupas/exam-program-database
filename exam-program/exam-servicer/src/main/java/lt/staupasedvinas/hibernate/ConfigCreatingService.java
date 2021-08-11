@@ -1,6 +1,6 @@
 package lt.staupasedvinas.hibernate;
 
-import lt.staupasedvinas.util.ConfigUtil;
+import dao.util.ConfigUtil;
 import org.hibernate.cfg.Configuration;
 
 import java.util.Map;

@@ -1,4 +1,4 @@
-package lt.staupasedvinas.util;
+package dao.util;
 
 import dao.exceptions.ConfigReadException;
 
@@ -12,13 +12,13 @@ public class ConfigUtil {
         Map<String, String> map = new HashMap<>();
         try (InputStream is = ConfigUtil.class.getResourceAsStream("/config.properties");
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(is)))) {
-            String line = "";
+            String line;
             while ((line = reader.readLine()) != null)
                 map.put(line.split("=")[0], line.split("=")[1]);
         } catch (IOException e) {
-            throw new ConfigReadException("There's something wrong with configuration file: " + e.getMessage());
+            throw new ConfigReadException(e.getMessage());
         } catch (NullPointerException e) {
-            throw new ConfigReadException("There's something wrong with configuration file: file not found");
+            throw new ConfigReadException("file not found");
         }
         return map;
     }
