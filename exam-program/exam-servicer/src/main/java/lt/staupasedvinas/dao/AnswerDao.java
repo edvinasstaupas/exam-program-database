@@ -13,7 +13,6 @@ public class AnswerDao extends AbstractDao<Answer> {
     }
 
     public List<Answer> loadAllWithName(String name) {
-        System.out.println("BZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
         Query<Answer> query = session.
                 createQuery("select a FROM Answer AS a " +
                         "JOIN QuestionnaireLog as ql " +
